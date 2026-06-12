@@ -42,6 +42,8 @@ kotlin {
             implementation(libs.koin.compose)
             // 🔹 Интеграция с ViewModel для управления состоянием
             implementation(libs.koin.compose.viewmodel)
+            implementation(libs.androidx.compose.material.icons.core)
+            implementation(libs.androidx.compose.material.icons.extended)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
