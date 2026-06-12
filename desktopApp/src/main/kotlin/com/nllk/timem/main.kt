@@ -2,12 +2,13 @@ package com.nllk.timem
 
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
+import com.nllk.timem.view.MainView
 
 fun main() = application {
     Window(
         onCloseRequest = ::exitApplication,
         title = "TimeM",
     ) {
-        App()
+        MainView()
     }
 }
