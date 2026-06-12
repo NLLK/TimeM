@@ -23,31 +23,29 @@ import org.koin.compose.koinInject
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomePage(viewModel: MainPageViewModel = koinInject(), modifier: Modifier) {
-    MaterialTheme {
-        Column(
-            modifier = Modifier
-                .background(MaterialTheme.colorScheme.primaryContainer)
-                .safeContentPadding()
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Row(verticalAlignment = Alignment.CenterVertically){
-                TimePickerButton("Время входа:")
-                Spacer(modifier = Modifier.width(5.dp))
-                Button(onClick = { viewModel.onEnterButtonClicked() }) {
-                    Text("Вход")
-                }
+    Column(
+        modifier = modifier
+            .background(MaterialTheme.colorScheme.primaryContainer)
+            .safeContentPadding()
+            .fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically){
+            TimePickerButton("Время входа:")
+            Spacer(modifier = Modifier.width(5.dp))
+            Button(onClick = { viewModel.onEnterButtonClicked() }) {
+                Text("Вход")
             }
-
-            Row(verticalAlignment = Alignment.CenterVertically){
-                TimePickerButton("Время выхода:")
-                Spacer(modifier = Modifier.width(5.dp))
-                Button(onClick = { viewModel.onExitButtonClicked() }) {
-                    Text("Выход")
-                }
-            }
-
         }
+
+        Row(verticalAlignment = Alignment.CenterVertically){
+            TimePickerButton("Время выхода:")
+            Spacer(modifier = Modifier.width(5.dp))
+            Button(onClick = { viewModel.onExitButtonClicked() }) {
+                Text("Выход")
+            }
+        }
+
     }
 }

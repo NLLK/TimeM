@@ -37,7 +37,7 @@ fun AppBottomNavigation(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 @Preview
-fun MainView(viewModel: MainPageViewModel = koinInject()) {
+fun MainView() {
     // Состояние для хранения текущего выбранного экрана
     var currentScreen by remember { mutableStateOf<Screen>(Screen.Home) }
 
