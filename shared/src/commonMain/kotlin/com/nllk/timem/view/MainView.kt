@@ -12,10 +12,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.nllk.timem.viewModel.MainPageViewModel
+import org.koin.compose.koinInject
 
 @Composable
 @Preview
-fun MainView() {
+fun MainView(viewModel: MainPageViewModel = koinInject()) {
     MaterialTheme {
         var showContent by remember { mutableStateOf(false) }
         Column(
@@ -26,7 +28,7 @@ fun MainView() {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Button(onClick = {  }) {
+            Button(onClick = { viewModel.onEnterButtonClicked() }) {
                 Text("Click me!")
             }
         }
