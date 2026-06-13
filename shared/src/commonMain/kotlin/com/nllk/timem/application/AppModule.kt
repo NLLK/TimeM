@@ -10,6 +10,6 @@ import org.koin.dsl.module
 
 val appModule = module {
     singleOf(::EntranceRepositoryImpl){bind<EntranceRepository>()}
-    single { EntranceService() }
+    single { EntranceService(get()) }
     factory { MainPageViewModel(get()) }
 }

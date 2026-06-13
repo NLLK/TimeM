@@ -1,13 +1,33 @@
 package com.nllk.timem.viewModel
 
-import com.nllk.timem.repository.EntranceRepository
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.ViewModel
+import com.nllk.timem.entity.EntranceType
+import com.nllk.timem.service.EntranceService
+import java.time.LocalDate
+import java.time.LocalTime
 
-class MainPageViewModel(repository: EntranceRepository){
+class MainPageViewModel(private val service: EntranceService) : ViewModel() {
+    var entryTime: LocalTime by mutableStateOf(LocalTime.now())
+        private set
+    var exitTime: LocalTime by mutableStateOf(LocalTime.now())
+        private set
+
+    fun updateEntryTime(time: LocalTime) {
+        entryTime = time
+    }
+
+    fun updateExitTime(time: LocalTime) {
+        exitTime = time
+    }
+
     fun onEnterButtonClicked() {
-        println("enter")
+        service.addEntryRecord(LocalDate.now(), entryTime, EntranceType.ENTER)
     }
 
     fun onExitButtonClicked() {
-        TODO("Not yet implemented")
+        service.addEntryRecord(LocalDate.now(), entryTime, EntranceType.EXIT)
     }
 }

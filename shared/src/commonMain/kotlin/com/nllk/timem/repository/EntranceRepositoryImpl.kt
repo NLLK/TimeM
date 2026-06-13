@@ -8,7 +8,7 @@ class EntranceRepositoryImpl : EntranceRepository {
         TODO("Not yet implemented")
     }
 
-    override fun read(id: Int): EntranceEntity {
+    override fun read(date: LocalDate): EntranceEntity? {
         TODO("Not yet implemented")
     }
 

@@ -16,6 +16,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import java.time.LocalTime
 import java.util.Calendar
 
 @Suppress("DefaultLocale")
@@ -23,17 +24,16 @@ import java.util.Calendar
 @Composable
 fun TimePickerButton(
     label: String,
-    initialHour: Int = Calendar.getInstance().get(Calendar.HOUR_OF_DAY),
-    initialMinute: Int = Calendar.getInstance().get(Calendar.MINUTE),
-    onTimeChanged: ((hour: Int, minute: Int) -> Unit)? = null)
+    time: LocalTime,
+    onTimeChanged: (LocalTime) -> Unit,
+    modifier: Modifier = Modifier
+)
 {
-    var hour by remember { mutableIntStateOf(initialHour) }
-    var minute by remember { mutableIntStateOf(initialMinute) }
     var showDialog by remember { mutableStateOf(false) }
     // Состояние пикера внутри диалога – инициализируем текущим выбранным временем
     val timePickerState = rememberTimePickerState(
-        initialHour = hour,
-        initialMinute = minute,
+        initialHour = time.hour,
+        initialMinute = time.minute,
         is24Hour = true
     )
 
@@ -41,12 +41,11 @@ fun TimePickerButton(
         Text(text = label)
         Spacer(modifier = Modifier.width(4.dp))
         Text(
-            text = String.format("%02d:%02d", hour, minute),
+            text = String.format("%02d:%02d", time.hour, time.minute),
             color = MaterialTheme.colorScheme.secondary,
             textDecoration = TextDecoration.Underline  // подчёркивание
         )
     }
-
 
     // Диалог выбора времени
     if (showDialog) {
@@ -55,10 +54,7 @@ fun TimePickerButton(
             onDismissRequest = { showDialog = false },
             confirmButton = {
                 TextButton(onClick = {
-                    // Подтверждение – сохраняем время из пикера
-                    hour = timePickerState.hour
-                    minute = timePickerState.minute
-                    onTimeChanged?.invoke(hour, minute)
+                    onTimeChanged(LocalTime.of(timePickerState.hour, timePickerState.minute))
                     showDialog = false
                 }) {
                     Text("OK")

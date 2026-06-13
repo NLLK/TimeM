@@ -22,7 +22,10 @@ import org.koin.compose.koinInject
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomePage(viewModel: MainPageViewModel = koinInject(), modifier: Modifier) {
+fun HomePage(
+    viewModel: MainPageViewModel = koinInject(),
+    modifier: Modifier
+) {
     Column(
         modifier = modifier
             .background(MaterialTheme.colorScheme.primaryContainer)
@@ -31,16 +34,22 @@ fun HomePage(viewModel: MainPageViewModel = koinInject(), modifier: Modifier) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Row(verticalAlignment = Alignment.CenterVertically){
-            TimePickerButton("Время входа:")
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            TimePickerButton(
+                "Время входа:",
+                time = viewModel.entryTime,
+                onTimeChanged = { viewModel.updateEntryTime(it) })
             Spacer(modifier = Modifier.width(5.dp))
             Button(onClick = { viewModel.onEnterButtonClicked() }) {
                 Text("Вход")
             }
         }
 
-        Row(verticalAlignment = Alignment.CenterVertically){
-            TimePickerButton("Время выхода:")
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            TimePickerButton(
+                label = "Время выхода:",
+                time = viewModel.exitTime,
+                onTimeChanged = { viewModel.updateExitTime(it) })
             Spacer(modifier = Modifier.width(5.dp))
             Button(onClick = { viewModel.onExitButtonClicked() }) {
                 Text("Выход")

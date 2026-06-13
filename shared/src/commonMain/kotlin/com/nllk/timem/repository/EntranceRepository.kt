@@ -5,7 +5,7 @@ import java.time.LocalDate
 
 interface EntranceRepository {
     fun create(entity: EntranceEntity)
-    fun read(id: Int) : EntranceEntity
+    fun read(date: LocalDate) : EntranceEntity?
     fun readLast(number: Int) : List<EntranceEntity>
     fun readFromDateToDate(dateFrom: LocalDate, dateTo: LocalDate) : List<EntranceEntity>
     fun update(entity: EntranceEntity)
