@@ -10,7 +10,7 @@ plugins {
 kotlin {
     jvm()
     
-    androidLibrary {
+    android {
        namespace = "com.nllk.timem.shared"
        compileSdk = libs.versions.android.compileSdk.get().toInt()
        minSdk = libs.versions.android.minSdk.get().toInt()
@@ -44,6 +44,7 @@ kotlin {
             implementation(libs.koin.compose.viewmodel)
             implementation(libs.androidx.compose.material.icons.core)
             implementation(libs.androidx.compose.material.icons.extended)
+            implementation(libs.napier)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
